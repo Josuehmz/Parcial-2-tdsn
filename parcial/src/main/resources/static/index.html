@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Searching</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Lineal</h1>
+    <form>
+        <label for="name">Lineal Searching:</label><br>
+        <input type="text" id="name" name="name" value=""><br><br>
+        <input type="button" value="Submit" onclick="loadGetMsg()">
+    </form>
+    <div id="getrespmsg"></div>
+    <script>
+        function loadGetMsg() {
+            let nameVar = document.getElementById("name").value;
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                document.getElementById("getrespmsg").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "/proxy/lineal?a=" + nameVar);
+            xhttp.send();
+        }
+    </script>
+
+    <h1>Binary</h1>
+    <form>
+        <label for="postname">Binary Searching:</label><br>
+        <input type="text" id="postname" name="postname" value=""><br><br>
+        <input type="button" value="Submit" onclick="loadPostMsg()">
+    </form>
+    <div id="postrespmsg"></div>
+    <script>
+        function loadPostMsg() {
+            let nameVar = document.getElementById("postname").value;
+            fetch("/proxy/binary?a=" + nameVar.split(',').join('&a='), { method: 'GET' })
+                .then(response => response.text())
+                .then(data => document.getElementById("postrespmsg").innerHTML = data);
+        }
+    </script>
+</body>
+</html>
