@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class MathController{
     @GetMapping("/api/lineal")
     public String linealSearch (@RequestParam ("a") ArrayList[] a){
+        
         ArrayList target = new ArrayList();
         for (int i = 0; i < a.length; i++){
             if (a[i] == target){
